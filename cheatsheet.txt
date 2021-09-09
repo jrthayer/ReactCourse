@@ -1,0 +1,6 @@
+ReactJs:
+    + a frontend js framework
+    + generally used for single-page-applications
+    + base react is focused on UI components extra functionality 
+        is added through third party packages
+    +Other frameworks: Angular(more features built in by default), Vue(more features than react less than angular)
