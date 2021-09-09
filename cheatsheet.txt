@@ -4,3 +4,79 @@ ReactJs:
     + base react is focused on UI components extra functionality 
         is added through third party packages
     +Other frameworks: Angular(more features built in by default), Vue(more features than react less than angular)
+
+JavaScript Refresher:
+    +variable types:
+        +var: old variable type only exists still for backwards compatibility
+        +const: constant values
+        +let: new var variable type, variable values
+    +arrow functions:
+        +regular function: function funcName(){}
+        +arrow function: const funcName = () => {}
+        +syntax shortcuts:
+            +one argument only:
+                +can remove () from arguments
+                +const funcName = arg => {}
+            +one line function body:
+                +can remove {} and return keyword
+                + codeLine will be returned
+                +const funcName = () => codeLine
+        +benefits of arrow function:
+            +slightly smaller syntax
+            +fixes issues with 'this' value, 'this' value is the expected scope.
+    +Modules: import js file into another js file
+        +Imports: add js to current js file.
+            +import name from jsFile: imports default of jsFile into name.
+            +import {value} from jsFile: imports specific value of jsFile into the same name as defined in js file.
+                +line above makes use of destructuring
+                +alternative: import {value as name} from jsFile
+            +import * as name from jsFile: imports everything under name alias.
+                +name.exportName
+        +Exports: allow part of js file to be imported to another file.
+            +default export: export default name
+            +value export: export type name
+    +Classes: blueprints for objects.
+        +syntax:
+            class Person{
+                constructor(){
+                    //This is run by default whenever class is instantiated
+                }
+                name = 'value',
+                call = () => {...}
+            }
+        +use:
+            +const myPerson = new Person();
+            person.call();
+        +inheritance:
+            +class Person extends Master
+            +to make use of parent class constructor, super() needs to be run in the child constructor.
+        +Properties: variables attached to classes/objects
+        +Methods: functions attached to classes/objects
+    +Spread & Rest Operators: ...
+        Spread: splits up array elements or object Properties
+            +const newArray = [...oldArray, 1, 2];
+        Rest: merge a list of function arguments into an array
+            + function sortArgs(...args){
+                return args;
+            }
+    +Destructuring: extracts array elements or object properties and stores them in variables
+        +Arrays:
+            +[a, b] = ['Hello', 'Max']
+            +console.log(a) //Hello
+            +console.log(b) //Max
+        +Objects:
+            +{name} = {name: 'Max', age: 28}
+            +console.log(name); // Max
+            +console.log(age); // undefined
+    +Standard JS:
+        +Reference Types: objects and arrays.
+            +Stores pointers to values.
+            +spread operator can be used to make proper copy, rather than reference.
+        +Primitive Types: numbers, strings, booleans.
+            +Makes copy of value.
+        +Array functions:
+            +array.arrayFunction(func): runs function on every element of array, functionality changes with arrayFunction type.
+
+
+
+
