@@ -98,6 +98,25 @@ ReactJs:
                     const classes = "card " + props.className;
                     return <div className={classes}>{props.children}</div>;
                 }
+    +Child to Parent data transfer:
+        +This is done by passing a function from the parent to the child through props, the child then calls that function to pass the data back.
+        +naming convention is to start the function name with onFunctionName.
     +Composition: building a page with smaller building blocks
-
+    +User Interaction & State:
+        +Events: node uses onEventName attributes of html to add event listeners
+        +State: All node functions are run at the start of the app one time, in order to update values state needs to be used. This
+            is done using the useState hook created by react. Each useState is an instance of the component.
+            +Example:
+                import { useState } from "react";
+                const [title, setTitle] = useState(props.title);
+            +useState: function that takes a value and returns an array with two values, the object being update and a function to update the value.
+                +when useState is update the JSX is rerun, react keeps track of when useState is run and updates value accordingly.
+            +Whenever you update a state and are dependent on the previous state an intermittent ()=> function should be used. This is because react schedules state changes
+                which means there is a chance an outdated state could be used, the step mentioned before prevents this.
+            +Two Way Binding: listen to value changes and able to add state value back into value. 
+                +Controlled component: component values are set in parent components.
+                +Stateful/Smart: components that manage states, they have states in them.
+                +Stateless/Dumb: components without states.
+            +Lifting State Up: giving state from one component to the next, this is done by passing the state to the closest parent related to both components.
+        +Hooks: react created methods that are called inside component functions, can't be nested.
 
