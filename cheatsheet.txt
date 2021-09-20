@@ -72,14 +72,32 @@ JavaScript Refresher:
 
 ReactJs:
     + a frontend js framework
-    + generally used for single-page-applications
+    + generally used for "single-page-applications"
     + base react is focused on UI components extra functionality 
         is added through third party packages
     +Other frameworks: Angular(more features built in by default), Vue(more features than react less than angular)
     +React is all about components
         +separates page into groups of elements
+        +all components are just js functions
     +Declarative Approach:
         +Define end state and let react figure out the actual js DOM instructions
-
+    
+    +JSX: JavaScript XML
+        +HTML inside a js file, only works due to steps react takes before serving the webpage files.
+    +Rules:
+        +Application has to start with index.js
+        +Application also needs an index.html(inside the public folder)
+        +Naming Conventions:
+            +components start capitalized and are then camelCase.
+        +components can only have one root html element.
+        +classes in JSX are set using className instead of class
+    +"Props": custom HTML properties, arguments passed into components, generally named props. They are defined like html attributes. 
+        +Props.children: each react component has this by default and it returns the elements in between the components tags.
+            +Example:
+                function Card(props) {
+                    const classes = "card " + props.className;
+                    return <div className={classes}>{props.children}</div>;
+                }
+    +Composition: building a page with smaller building blocks
 
 
