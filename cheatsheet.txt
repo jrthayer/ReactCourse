@@ -85,6 +85,13 @@ ReactJs:
     +JSX: JavaScript XML
         +HTML inside a js file, only works due to steps react takes before serving the webpage files.
         +Can be stored/used outside the return function.
+        +Limitations:
+            +Have to have a single root jsx element(js only allows a single return value)
+                +This is solved by wrapping adjacent elements in a wrapper element
+                +You can also use an array of JSX elements but then each element needs a key, like any list in a react app.
+            +The above solution results in a lot of unnecessary divs(aka <div> soup)
+                +This is solved using a react component that only returns props.children, this results in one return value and no extra div wrapper. 
+                    +This solution comes with react using <React.Fragment></React.Fragment> or <></>(this only works if project specs supports it)
     +Rules:
         +Application has to start with index.js
         +Application also needs an index.html(inside the public folder)
@@ -153,7 +160,32 @@ ReactJs:
                     +Example:  <div className={`form-control ${!isValid ? "invalid" : ""}`}>
 
         +Hooks: react created methods that are called inside component functions, can't be nested.
+        +React Fragments: remove unnecessary html elements of the page.
+             +This solution comes with react using <React.Fragment></React.Fragment> or <></>(this only works if project specs supports it)
+        +React Portals: Allows jsx code to be placed in different locations in the DOM.
+            +Requirements:
+                +Define place to put the JSX, use a html id to set location
+                +JSX needing to be placed.
+                +Example:
+                    {ReactDOM.createPortal(
+                        <Backdrop onConfirm={props.onConfirm} />, 
+                        document.getElementById("backdrop-root")
+                    )}
+            +Can be used anywhere you would use JSX code
+        +React Refs: connect html element to js code,
+            +made using react hook useRef.
+            +Useful when you need to read a value, but you might need to manipulate the DOM a little which should generally be avoided.
+            +ref will have the actual DOM element it is referencing, this means you can manipulate it but should generally avoid.
+                +nameRef.current.value = the current value of that dom element, like the text of an input field.
+            +Example:
+                const nameInputRef = useRef();
 
+                <input type="text" id="username" ref={nameInputRef} />
+        +Controlled vs Uncontrolled Components:
+            +Controlled: Element state is controlled/manipulated by React.
+            +Uncontrolled: The state of the element is not controlled by React, like when you manipulate the DOM with Refs.
+
+        +React Portals:
         +Debugging React Apps:
             +Breakpoints & React Dev Tools for chrome
 
