@@ -154,3 +154,6 @@ ReactJs:
 
         +Hooks: react created methods that are called inside component functions, can't be nested.
 
+        +Debugging React Apps:
+            +Breakpoints & React Dev Tools for chrome
+
