@@ -125,10 +125,32 @@ ReactJs:
             +By default react only knows the the length of an array when adding a new element it is added to the bottom of the array and all values are updated to the correct postion.
                 +To prevent this you use the key attribute on each item to tell react which element is associated with which key.
                     +key needs to be a unique numerical identifier within the list.
+        +Styling:
+            +by default importing css files adds all css to global css, this can lead to styling overrides.
+                +solutions:
+                    +styled-components: a node library
+                        +installed using npm -S styled-components
+                        +uses tagged template literal.
+                        +when selecting the component it is in use & instead of the tag/class
+                        +props can be used inside these elements like react
+                    +css modules:
+                        +enable by default on create-react-app 
+                        +Requirements:
+                            +import styles from "./name.modules.css"
+                            +name css file with name.modules.css
+                            +when using it you then access the the styles using className = {styles.classNameHere}
+                        +Example:
+                            <div className={`
+                                ${styles["form-control"]} ${!isValid && styles.invalid}`
+                            }>
+
             +Dynamic Styling:
                 +react overrides the style attribute and expects a js object with key value pairs where the key is the css attribute.
                     +Example:<div style={{ height: "50%" }}></div>
                     +if the css attribute has a - you need to use camelCase or put '' around the value.
                     +js variables can be used as the value but still need to compile with css syntax.
+                +classes can be dynamically using string template literals.
+                    +Example:  <div className={`form-control ${!isValid ? "invalid" : ""}`}>
+
         +Hooks: react created methods that are called inside component functions, can't be nested.
 
