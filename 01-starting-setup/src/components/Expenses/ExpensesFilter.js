@@ -6,7 +6,6 @@ const ExpensesFilter = (props) => {
     function filterChangeHandler(event) {
         let value = event.target.value;
         props.onFilterChange(value);
-        console.log(value);
     }
 
     return (

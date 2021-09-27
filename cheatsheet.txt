@@ -84,6 +84,7 @@ ReactJs:
     
     +JSX: JavaScript XML
         +HTML inside a js file, only works due to steps react takes before serving the webpage files.
+        +Can be stored/used outside the return function.
     +Rules:
         +Application has to start with index.js
         +Application also needs an index.html(inside the public folder)
@@ -111,12 +112,23 @@ ReactJs:
                 const [title, setTitle] = useState(props.title);
             +useState: function that takes a value and returns an array with two values, the object being update and a function to update the value.
                 +when useState is update the JSX is rerun, react keeps track of when useState is run and updates value accordingly.
-            +Whenever you update a state and are dependent on the previous state an intermittent ()=> function should be used. This is because react schedules state changes
-                which means there is a chance an outdated state could be used, the step mentioned before prevents this.
+           
             +Two Way Binding: listen to value changes and able to add state value back into value. 
                 +Controlled component: component values are set in parent components.
                 +Stateful/Smart: components that manage states, they have states in them.
                 +Stateless/Dumb: components without states.
             +Lifting State Up: giving state from one component to the next, this is done by passing the state to the closest parent related to both components.
+        +Rendering Lists:
+            +Whenever you update a state and are dependent on the previous state an intermittent ()=> function should be used. This is because react schedules state changes
+            which means there is a chance an outdated state could be used, the step mentioned before prevents this.
+                +react by default provides the previous state of the element as the first argument of that function.
+            +By default react only knows the the length of an array when adding a new element it is added to the bottom of the array and all values are updated to the correct postion.
+                +To prevent this you use the key attribute on each item to tell react which element is associated with which key.
+                    +key needs to be a unique numerical identifier within the list.
+            +Dynamic Styling:
+                +react overrides the style attribute and expects a js object with key value pairs where the key is the css attribute.
+                    +Example:<div style={{ height: "50%" }}></div>
+                    +if the css attribute has a - you need to use camelCase or put '' around the value.
+                    +js variables can be used as the value but still need to compile with css syntax.
         +Hooks: react created methods that are called inside component functions, can't be nested.
 
