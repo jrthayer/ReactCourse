@@ -71,6 +71,12 @@ JavaScript Refresher:
             +array.arrayFunction(func): runs function on every element of array, functionality changes with arrayFunction type.
 
 ReactJs:
+    +Summary: React's main job is to Render UI & React to User Input.
+        +Evaluate & Render JSX
+        +Manage State & Props
+        +React to (User) Events & Input
+        +Re-evaluate Component upon State & Prop Changes
+
     + a frontend js framework
     + generally used for "single-page-applications"
     + base react is focused on UI components extra functionality 
@@ -92,6 +98,7 @@ ReactJs:
             +The above solution results in a lot of unnecessary divs(aka <div> soup)
                 +This is solved using a react component that only returns props.children, this results in one return value and no extra div wrapper. 
                     +This solution comes with react using <React.Fragment></React.Fragment> or <></>(this only works if project specs supports it)
+    
     +Rules:
         +Application has to start with index.js
         +Application also needs an index.html(inside the public folder)
@@ -99,6 +106,7 @@ ReactJs:
             +components start capitalized and are then camelCase.
         +components can only have one root html element.
         +classes in JSX are set using className instead of class
+    
     +"Props": custom HTML properties, arguments passed into components, generally named props. They are defined like html attributes. 
         +Props.children: each react component has this by default and it returns the elements in between the components tags.
             +Example:
@@ -106,12 +114,17 @@ ReactJs:
                     const classes = "card " + props.className;
                     return <div className={classes}>{props.children}</div>;
                 }
+    
     +Child to Parent data transfer:
         +This is done by passing a function from the parent to the child through props, the child then calls that function to pass the data back.
         +naming convention is to start the function name with onFunctionName.
+    
     +Composition: building a page with smaller building blocks
+    
     +User Interaction & State:
+        
         +Events: node uses onEventName attributes of html to add event listeners
+        
         +State: All node functions are run at the start of the app one time, in order to update values state needs to be used. This
             is done using the useState hook created by react. Each useState is an instance of the component.
             +Example:
@@ -125,6 +138,7 @@ ReactJs:
                 +Stateful/Smart: components that manage states, they have states in them.
                 +Stateless/Dumb: components without states.
             +Lifting State Up: giving state from one component to the next, this is done by passing the state to the closest parent related to both components.
+        
         +Rendering Lists:
             +Whenever you update a state and are dependent on the previous state an intermittent ()=> function should be used. This is because react schedules state changes
             which means there is a chance an outdated state could be used, the step mentioned before prevents this.
@@ -132,6 +146,7 @@ ReactJs:
             +By default react only knows the the length of an array when adding a new element it is added to the bottom of the array and all values are updated to the correct postion.
                 +To prevent this you use the key attribute on each item to tell react which element is associated with which key.
                     +key needs to be a unique numerical identifier within the list.
+        
         +Styling:
             +by default importing css files adds all css to global css, this can lead to styling overrides.
                 +solutions:
@@ -160,8 +175,13 @@ ReactJs:
                     +Example:  <div className={`form-control ${!isValid ? "invalid" : ""}`}>
 
         +Hooks: react created methods that are called inside component functions, can't be nested.
+        
+        +Debugging React Apps:
+            +Breakpoints & React Dev Tools for chrome
+        
         +React Fragments: remove unnecessary html elements of the page.
              +This solution comes with react using <React.Fragment></React.Fragment> or <></>(this only works if project specs supports it)
+        
         +React Portals: Allows jsx code to be placed in different locations in the DOM.
             +Requirements:
                 +Define place to put the JSX, use a html id to set location
@@ -172,6 +192,7 @@ ReactJs:
                         document.getElementById("backdrop-root")
                     )}
             +Can be used anywhere you would use JSX code
+        
         +React Refs: connect html element to js code,
             +made using react hook useRef.
             +Useful when you need to read a value, but you might need to manipulate the DOM a little which should generally be avoided.
@@ -181,11 +202,74 @@ ReactJs:
                 const nameInputRef = useRef();
 
                 <input type="text" id="username" ref={nameInputRef} />
+        
         +Controlled vs Uncontrolled Components:
             +Controlled: Element state is controlled/manipulated by React.
             +Uncontrolled: The state of the element is not controlled by React, like when you manipulate the DOM with Refs.
+        
+        +Advanced Features(Hooks): 
+            +Effects(or Side Effect): everything that isn't adding/manipulating things on the screen. Executes code in response to an action.
+                +Misc examples:
+                    +Storing Data in Browser Storage
+                    +Sending Http Requests to Backend Servers
+                    +Set & Manage Timers
+                +useEffect() Hook:
+                    +parameters:
+                        +a function executed AFTER every component evaluation IF the specified dependencies changed.(Side effect code goes here)
+                        +dependencies of this effects- function before only runs if there are changes to dependencies.
+                        +by default an empty dependency array will result in the effect being run one time(when the app starts), since no
+                        dependencies are updated it will never run again
+                    +Dependencies Tips:
+                        +You DON'T need to add state updating functions (as we did in the last lecture with setFormIsValid): 
+                        React guarantees that those functions never change, hence you don't need to add them as dependencies (you could though)
+                        
+                        +You also DON'T need to add "built-in" APIs or functions like fetch(), localStorage etc (functions and features built-into the browser and hence available globally): 
+                        These browser APIs / global functions are not related to the React component render cycle and they also never change
+                        
+                        +You also DON'T need to add variables or functions you might've defined OUTSIDE of your components (e.g. if you create a new helper function in a separate file): 
+                        Such functions or variables also are not created inside of a component function and hence changing them won't affect your components 
+                        (components won't be re-evaluated if such variables or functions change and vice-versa)
 
-        +React Portals:
-        +Debugging React Apps:
-            +Breakpoints & React Dev Tools for chrome
+                        +You must add all "things" you use in your effect function if those "things" could change because your component (or some parent component) re-rendered.
+                +Debounce: wait a certain amount of time after user input has stopped
+                +Cleanup Function:
+                    +a return function inside the effect that runs the next time the effect runs, does not run on first call.
+            
+            +Reducers:
+                +react hook, that helps manage state, a replacement for useState() if you need "more powerful state management"
+                +syntax: const [state, dispatchFn] = useReducer(reducerFn, initialState, initFn)
+                    +state: the latest state snapshot
+                    +function: to update state snapshot
+                    +reducerFn: reducer function, triggered automatically when an action is dispatched.
+                    +initialState: sets initial state
+                    +initFn: initial function, starting function for complex states
+            
+            +Context(Or Context API): Component wide, State Storage
+                +Allows you to pass states to components without using prop chaining
+                +Used by defining AuthContext.Provider with values for the states being passed.
+                    +example:
+                        <AuthContext.Provider
+                            value={{
+                                isLoggedIn: isLoggedIn,
+                                onLogout: logoutHandler,
+                                onLogin: loginHandler,
+                            }}
+                        >
+                    +then to use the context in another component we use the useContext hook.
+                        const ctx = useContext(AuthContext); ctx.isLoggedIn ==> gives isLoggedIn state
+                +Limitations:
+                    +Not optimized for high frequency changes!
+                    +Shouldn't replace ALL component communication and props
+            
+            +Rules of Hooks:
+                1. Only call react hooks in React functions
+                    +React Component functions
+                    +Custom Hooks
+                2. Only call react hooks at the TOP Level
+                    +Can't be in nested functions
+                    +Can't call them in any block statements
+                +extraRule for useEffect(): Always add everything you refer to inside of useEffect() as a dependency
+
+        
+        
 
